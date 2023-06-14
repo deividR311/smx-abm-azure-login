@@ -1,0 +1,93 @@
+<div class="row">
+  <div class="col-6">
+  </div>
+  <div class="col-6" align="end">
+    <button mat-button (click)="openConfirmAction()">x</button>
+  </div>
+</div>
+
+
+<mat-dialog-content class="mat-typography">
+  <form class="example-form" [formGroup]="attendantForm">
+    <div class="row">
+      <div class="col">
+      </div>
+      <div class="col-10">
+        <div class="row">
+          <div class="col-12">
+            <h1 mat-dialog-title *ngIf="data.validation === save">Crear Atendedor </h1>
+            <h1 mat-dialog-title *ngIf="data.validation === update">Actualizar Atendedor </h1>
+            <mat-form-field class="inputForm">
+              <mat-label>RUT</mat-label>
+              <input appRut matInput placeholder="Ingrese el RUT" formControlName="rut" autocomplete="off">
+              <mat-error *ngIf="hasRutError('rut', 'required')"> Este campo es obligatorio para la {{data.validation}}
+                de un
+                usuario atendedor</mat-error>
+              <mat-error *ngIf="hasRutError('rut', 'rutValidator') && !hasRutError('rut', 'required')">Formato inválido
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="inputForm" *ngIf="data.validation === update">
+              <mat-label>Id</mat-label>
+              <input matInput placeholder="123456789" formControlName="id">
+            </mat-form-field>
+          </div>
+          <div class="col-12">
+            <mat-form-field class="inputForm">
+              <mat-label>Nombre</mat-label>
+              <input matInput placeholder="Ingrese el nombre" type="text" formControlName="name" maxlength="25"
+                autocomplete="off">
+              <mat-error *ngIf="hasRutError('name', 'required')">
+                Este campo es obligatorio para la {{data.validation}} de un usuario atendedor
+              </mat-error>
+              <mat-error *ngIf="attendantForm.get('name')?.errors?.['maxlength']">
+                Solo se permiten 25 caracteres
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-12">
+            <mat-form-field class="inputForm">
+              <mat-label>Apellido</mat-label>
+              <input matInput placeholder="Ingrese el apellido" type="text" formControlName="lastname" maxlength="25"
+                autocomplete="off">
+              <mat-error *ngIf="hasRutError('lastname', 'required')">
+                Este campo es obligatorio para la {{data.validation}} de un usuario atendedor
+              </mat-error>
+              <mat-error *ngIf="attendantForm.get('lastname')?.errors?.['maxlength']">
+                Solo se permiten 25 caracteres
+              </mat-error>
+
+            </mat-form-field>
+          </div>
+          <div class="col-12">
+            <mat-form-field class="inputForm">
+              <mat-label>Estación de Servicio</mat-label>
+              <mat-select name="ideess" formControlName="ideess" placeholder="Seleccione la estacion de servicio">
+                <mat-option *ngFor="let item of estaciones" [value]="item?.ideess">
+                  {{item?.ee_ss?.nombrefantasia}}
+                </mat-option>
+              </mat-select>
+              <mat-error
+                *ngIf="attendantForm.controls['ideess'].invalid && (attendantForm.controls['ideess'].dirty || attendantForm.controls['ideess'].touched)">
+                Este campo es obligatorio para la {{data.validation}} de un usuario atendedor
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <div class="footerdiv">
+    <button mat-raised-button (click)="openConfirmAction()">Cancelar</button>
+    <button *ngIf="data.validation === update" mat-button cdkFocusInitial type="submit"
+      [disabled]="!attendantForm.valid" mat-raised-button color="primary"
+      (click)="updateAttendant()">Actualizar</button>
+    <button *ngIf="data.validation === save" mat-button cdkFocusInitial type="submit" [disabled]="!attendantForm.valid"
+      (click)="saveAttendant()" mat-raised-button color="primary">Guardar</button>
+  </div>
+</mat-dialog-actions>

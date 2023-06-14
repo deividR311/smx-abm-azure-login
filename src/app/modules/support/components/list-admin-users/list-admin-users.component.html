@@ -1,0 +1,132 @@
+<div class="espacio" *ngIf="listUsers.length == 0">
+    <div class="row">
+        <div class="col-12">
+            <mat-card class="card-color">
+                <div class="row">
+                    <div class="col-7"></div>
+                    <div class="col-5" mat-dialog-actions align="end">
+                        <h1>No hay resultados</h1>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</div>
+<div class="espacio" *ngIf="listUsers.length != 0">
+    <section class="example-container" *ngxPermissionsOnly="['SupportComponent.leer']">
+        <table mat-table [dataSource]="listUsers" class="tablematerial">
+            <caption>Tabla de registros</caption>
+            <ng-container matColumnDef="Identificador">
+                <th scope="col" mat-header-cell *matHeaderCellDef class="tableheader">
+                    <div class="row" style="text-align: center;">
+                        <strong class="colorletter">Identificador</strong>
+                    </div>
+                </th>
+                <td mat-cell *matCellDef="let element" class="tdtable">
+                    {{element.identificador}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="RUT">
+                <th scope="col" mat-header-cell *matHeaderCellDef class="tableheader">
+                    <div class="row" style="text-align: center;">
+                        <strong class="colorletter">RUT</strong>
+                    </div>
+                </th>
+                <td mat-cell *matCellDef="let element" class="tdtable" style="width: 10%;" > {{element?.rut}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Nombre">
+                <th scope="col" mat-header-cell *matHeaderCellDef class="tableheader">
+                    <div class="row" style="text-align: center;">
+                        <strong class="colorletter">Nombre</strong>
+                    </div>
+                </th>
+                <td mat-cell *matCellDef="let element" class="tdtable"> {{element?.nombre}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Apellido">
+                <th scope="col" mat-header-cell *matHeaderCellDef class="tableheader">
+                    <div class="row" style="text-align: center;">
+                        <strong class="colorletter">Apellido</strong>
+                    </div>
+                </th>
+                <td mat-cell *matCellDef="let element" class="tdtable"> {{element?.apellido}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Email">
+                <th scope="col" mat-header-cell *matHeaderCellDef class="tableheader">
+                    <div class="row" style="text-align: center;">
+                        <strong class="colorletter">Correo Electrónico</strong>
+                    </div>
+                </th>
+                <td mat-cell *matCellDef="let element" class="tdtable"> {{element?.email}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="EDS">
+                <th scope="col" mat-header-cell *matHeaderCellDef class="tableheader">
+                    <div class="row" style="text-align: center;">
+                        <strong class="colorletter">EDS</strong>
+                    </div>
+                </th>
+                <td mat-cell *matCellDef="let element" class="tdtable">
+                    {{element?.station?.nombrefantasia}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="FechaC">
+                <th scope="col" mat-header-cell *matHeaderCellDef class="tableheader">
+                    <div class="row" style="text-align: center;">
+                        <strong class="colorletter">Fecha Creación</strong>
+                    </div>
+                </th>
+                <td mat-cell *matCellDef="let element" class="tdtable">
+                    {{element?.createdat | momentPipe2:'DD/MM/YYYY HH:mm'}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="FechaU">
+                <th scope="col" mat-header-cell *matHeaderCellDef class="tableheader">
+                    <div class="row" style="text-align: center;">
+                        <strong class="colorletter">Fecha Actualización</strong>
+                    </div>
+                </th>
+                <td mat-cell *matCellDef="let element" class="tdtable">
+                    {{element?.updatedat | momentPipe2:'DD/MM/YYYY HH:mm'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Ultima">
+                <th scope="col" mat-header-cell *matHeaderCellDef class="tableheader">
+                    <div class="row" style="text-align: center;">
+                        <strong class="colorletter">Última conexión</strong>
+                    </div>
+                </th>
+                <td mat-cell *matCellDef="let element" class="tdtable">
+                    {{element?.updatedat | momentPipe2:'DD/MM/YYYY HH:mm'}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Gestion">
+                <th scope="col" mat-header-cell *matHeaderCellDef class="tableheader gestionth">
+                    <div class="row" style="text-align: center;">
+                        <strong class="colorletter">Gestión</strong>
+                    </div>
+                </th>
+                <td mat-cell *matCellDef="let element" class="tdtable tdtablegestion">
+                    <div class="row centertext">
+                        <div class="col-6 buttonsDisabled" tabindex=" 0"
+                            *ngxPermissionsOnly="['SupportComponent.actualizar']">
+                            <app-icon [nameIcon]="'updateicon'"></app-icon>
+                        </div>
+                        <div class="col-6 buttonsDisabled" tabindex=" 0"
+                            *ngxPermissionsOnly="['SupportComponent.eliminar']">
+                            <app-icon [nameIcon]="'deleteicon'"></app-icon>
+                        </div>
+                    </div>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </section>
+</div>

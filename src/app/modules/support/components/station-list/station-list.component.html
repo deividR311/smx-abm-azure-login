@@ -1,0 +1,51 @@
+<div class="row align-items-start">
+    <div class="col-3 espaciocolum" *ngxPermissionsOnly="['SupportComponent.crear']">
+        <mat-card class="example-card borderCardUser">
+            <div class="espacio2"></div>
+            <div class="row">
+                <div class="col-8 espacio">
+                    <div class="row">
+                        <div class="col-2">
+                            <app-icon [nameIcon]="'profile'"></app-icon>
+                        </div>
+                        <div class="col-10">
+                            <mat-card-subtitle>
+                                Registrar nuevo Administrador de EDS
+                            </mat-card-subtitle>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <a (click)="openDialogCreate()">
+                        <app-icon [nameIcon]="'create'"></app-icon>
+                    </a>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+    <div class="col-3 espaciocolum" *ngxPermissionsOnly="['SupportComponent.crear']">
+        <mat-card class="example-card borderCardUser">
+            <div class="espacio2"></div>
+            <div class="row">
+                <div class="col-8 espacio">
+                    <div class="row">
+                        <div class="col-2">
+                            <app-icon [nameIcon]="'user'"></app-icon>
+                        </div>
+                        <div class="col-10">
+                            <mat-card-subtitle>
+                                Asociar Usuario Administrador a EDS
+                            </mat-card-subtitle>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <a (click)="openDialog()">
+                        <app-icon [nameIcon]="'create'"></app-icon>
+                    </a>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>
+<app-list-admin-users [iscreate]="iscreate"></app-list-admin-users>

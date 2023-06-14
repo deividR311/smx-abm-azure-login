@@ -1,0 +1,13 @@
+<h2 mat-dialog-title style="text-align: center;">{{ data.title }}</h2>
+<div mat-dialog-content style="overflow: inherit;">
+    <mat-radio-group style="display: flex; flex-direction: column;">
+        <mat-radio-button
+            *ngFor="let rol of data.data"
+            [value]="rol.id"
+            color="primary"
+            (change)="closeDialog(rol)" 
+            class="radio-mb">
+            {{ rol.descripcion }}
+      </mat-radio-button>
+    </mat-radio-group>
+</div>

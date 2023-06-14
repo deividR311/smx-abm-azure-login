@@ -1,0 +1,33 @@
+.borderCard {
+    border: 1px solid rgba(0, 184, 91, 0.4);
+}
+
+.active {
+    background: rgba(0, 184, 91, 0.4);
+    color: rgb(0, 0, 0);
+}
+
+.borderCardUser {
+    border-style: dashed;
+    border-color: #15DA87;
+}
+.espacio{
+    margin-top: 5px;
+}
+.espacio2{
+    margin-top: 17px !important;
+}
+.espaciocolum{
+    padding: 5px;
+}
+
+/* The heart of the matter */
+.testimonial-group > .row {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .testimonial-group > .row > .col-4 {
+    display: inline-block;
+  }
+  

@@ -1,0 +1,62 @@
+<div class="row align-items-start" *ngIf="seasons.length != 0">
+    <div class="col-3 espaciocolum" *ngFor="let item of seasons">
+        <mat-card [ngClass]="idStation === item?.ideess ? 'example-card borderCard active' : 'example-card borderCard '"
+            *ngxPermissionsOnly="['ManagementComponent.leer']">
+            <div (click)="captureIdStation(item?.ideess, item)"
+                (keydown)="captureIdStation(item?.ideess, item)" tabindex=" 0">
+                <div class="row">
+                    <div class="col-2">
+                        <app-icon [nameIcon]="'estation'"></app-icon>
+                    </div>
+                    <div class="col-10 espacio">
+                        <h4>
+                            <strong>
+                                {{item.nombrefantasia}}
+                            </strong>
+                        </h4>
+                    </div>
+                </div>
+                <mat-divider inset class="espacio"></mat-divider>
+                <div class="row espacio">
+                    <div class="col-2 espacio">
+                        <app-icon [nameIcon]="'user'"></app-icon>
+                    </div>
+                    <div class="col-10 espacio">
+                        <mat-card-subtitle>
+                            {{item.usuariosActivos}} total de usuarios
+                        </mat-card-subtitle>
+                    </div>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+    <div class="col-3 espaciocolum" *ngxPermissionsOnly="['ManagementComponent.crear']">
+        <mat-card class="example-card borderCardUser">
+            <div class="espacio2"></div>
+            <div class="row">
+                <div class="col-8 espacio">
+                    <div class="row">
+                        <div class="col-2">
+                            <app-icon [nameIcon]="'profile'"></app-icon>
+                        </div>
+                        <div class="col-10">
+                            <mat-card-subtitle>
+                                Crear nuevo<br>
+                                Atentedor
+                            </mat-card-subtitle>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <a (click)="openDialog()">
+                        <app-icon [nameIcon]="'create'"></app-icon>
+                    </a>
+
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>
+<app-attendants *ngIf="idStation" [IdStation]="idStation" [station]="station" [iscreate]="iscreate"
+    (getList)="getSeasons()">
+</app-attendants>

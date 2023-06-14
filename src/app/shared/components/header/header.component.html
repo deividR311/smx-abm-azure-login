@@ -1,0 +1,34 @@
+<div class="header" *ngIf="dataUser">
+    <a href="#default" class="logo">
+        <app-icon [nameIcon]="icon"></app-icon>
+    </a>
+    <div class="header-right">
+        <a *ngIf="rol != 'superadministrador'">
+            <app-icon [nameIcon]="'settings'"></app-icon>
+        </a>
+        <a *ngIf="rol === 'superadministrador'" [matMenuTriggerFor]="rutas">
+            <app-icon [nameIcon]="'settings'"></app-icon>
+        </a>
+        <a>
+            <app-icon [nameIcon]="'notification'"></app-icon>
+        </a>
+        <a>
+            <p>
+                {{dataUser}}
+            </p>
+        </a>
+        <a [matMenuTriggerFor]="menu">
+            <app-icon [nameIcon]="iconSetting"></app-icon>
+        </a>
+    </div>
+</div>
+
+
+<mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="logout()">Cerrar Sesión</button>
+</mat-menu>
+
+<mat-menu #rutas="matMenu">
+    <button mat-menu-item (click)="redirectAdminEDS()">Gestión de Administradores EDS</button>
+    <button mat-menu-item (click)="redirectAdmin()">Gestión de Atendedores</button>
+</mat-menu>
